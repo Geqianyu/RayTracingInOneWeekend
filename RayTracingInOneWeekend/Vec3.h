@@ -13,6 +13,7 @@ public:
     ~vec3();
 
     vec3 operator-() const;
+    void operator=(const vec3& v);
     vec3& operator+=(const vec3& v);
     vec3& operator*=(const double t);
     vec3& operator/=(const double t);

@@ -1,5 +1,5 @@
 #ifndef _GQY_RAY_H_
-#define _GQY_RAY_H
+#define _GQY_RAY_H_
 
 #include "Vec3.h"
 

@@ -21,6 +21,13 @@ vec3 vec3::operator-() const
     return vec3(-x, -y, -z);
 }
 
+void vec3::operator=(const vec3& v)
+{
+    x = v.x;
+    y = v.y;
+    z = v.z;
+}
+
 vec3& vec3::operator+=(const vec3& v)
 {
     x += v.x;
