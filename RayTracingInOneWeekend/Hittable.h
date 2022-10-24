@@ -1,12 +1,16 @@
-#ifndef _GQY_HITTABLE_H_
+ï»¿#ifndef _GQY_HITTABLE_H_
 #define _GQY_HITTABLE_H_
 
+#include <memory>
+
+#include "Material.h"
 #include "Ray.h"
 
 struct Hit_record
 {
     point p;
     vec3 normal;
+    std::shared_ptr<Material> material_ptr;
     double t;
     bool front_face;
 
@@ -16,7 +20,7 @@ struct Hit_record
 class Hittable
 {
 public:
-    // ¹«ÓÐº¯Êý
+    // å…¬æœ‰å‡½æ•°
     virtual bool hit(const ray& r, double t_min, double t_max, Hit_record& rec) const = 0;
 };
 

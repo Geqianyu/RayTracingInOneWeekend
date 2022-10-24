@@ -1,4 +1,4 @@
-
+﻿
 #include <fstream>
 
 #include "RTIWeekend.h"
@@ -11,9 +11,9 @@ void write_color(std::ofstream& out_file, color pixel_color, int samplers_per_pi
     auto b = pixel_color.b;
 
     auto scale = 1.0 / samplers_per_pixel;
-    r *= scale;
-    g *= scale;
-    b *= scale;
+    r = std::sqrt(scale * r);
+    g = std::sqrt(scale * g);
+    b = std::sqrt(scale * b);
 
     out_file << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
         << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '

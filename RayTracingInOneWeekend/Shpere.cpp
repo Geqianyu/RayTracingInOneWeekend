@@ -1,4 +1,4 @@
-
+﻿
 #include "Sphere.h"
 
 Shpere::Shpere() : radius(0.0)
@@ -6,7 +6,7 @@ Shpere::Shpere() : radius(0.0)
 
 }
 
-Shpere::Shpere(point centerValue, double radiusValue) : center(centerValue), radius(radiusValue)
+Shpere::Shpere(point centerValue, double radiusValue, std::shared_ptr<Material> material) : center(centerValue), radius(radiusValue), material_ptr(material)
 {
 
 }
@@ -44,6 +44,7 @@ bool Shpere::hit(const ray& r, double t_min, double t_max, Hit_record& rec) cons
     rec.p = r.at(rec.t);
     vec3 outward_normal = (rec.p - center) / radius;
     rec.set_face_normal(r, outward_normal);
+    rec.material_ptr = material_ptr;
 
     return true;
 }

@@ -1,23 +1,27 @@
-#ifndef _GQY_SHPERE_H_
+ï»¿#ifndef _GQY_SHPERE_H_
 #define _GQY_SHPERE_H_
 
+#include <memory>
+
+#include "Material.h"
 #include "Hittable.h"
 #include "Vec3.h"
 
 class Shpere : public Hittable
 {
 public:
-    // ¹«ÓĞº¯Êı
+    // å…¬æœ‰å‡½æ•°
     Shpere();
-    Shpere(point centerValue, double radiusValue);
+    Shpere(point centerValue, double radiusValue, std::shared_ptr<Material> material);
     ~Shpere();
 
     virtual bool hit(const ray& r, double t_min, double t_max, Hit_record& rec) const override;
 
 public:
-    // ¹«ÓĞ±äÁ¿
+    // å…¬æœ‰å˜é‡
     point center;
     double radius;
+    std::shared_ptr<Material> material_ptr;
 };
 
 #endif // !_GQY_SHPERE_H_

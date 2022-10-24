@@ -1,4 +1,4 @@
-#ifndef _GQY_CAMERA_H_
+ï»¿#ifndef _GQY_CAMERA_H_
 #define _GQY_CAMERA_H_
 
 #include "Vec3.h"
@@ -7,18 +7,20 @@
 class Camera
 {
 public:
-    // ¹«ÓĞº¯Êı
-    Camera();
+    // å…¬æœ‰å‡½æ•°
+    Camera(point lookfrom, point lookat, vec3 vup, double vfov, double aspect_ratio, double aperture, double focus_dist);
     ~Camera();
 
-    ray get_ray(double u, double v) const;
+    ray get_ray(double s, double t) const;
 
 public:
-    // ¹«ÓĞ³ÉÔ±
+    // å…¬æœ‰æˆå‘˜
     point origin;
     point lower_left_corner;
     vec3 horizontal;
     vec3 vertical;
+    vec3 u, v, w;
+    double lens_radius;
 };
 
 #endif // !_GQY_CAMERA_H_
