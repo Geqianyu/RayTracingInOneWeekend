@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Camera.h"
 #include "Material.h"
+#include "MovingSphere.h"
 
 color ray_color(const ray& r, const Hittable& world, int depth)
 {
@@ -54,7 +55,8 @@ HittableList random_scene()
                     // diffuse
                     auto albedo = color::random() * color::random();
                     sphere_material = std::make_shared<Lambertian>(albedo);
-                    world.add(std::make_shared<Shpere>(center, 0.2, sphere_material));
+                    auto center2 = center + vec3(0, random_double(0, 0.5), 0);
+                    world.add(std::make_shared<MovingSphere>(center, center2, 0.0, 1.0, 0.2, sphere_material));
                 }
                 else if (choose_mat < 0.95) {
                     // metal
@@ -88,11 +90,11 @@ HittableList random_scene()
 int main()
 {
     int max_depth = 50;
-    const int image_width = 1200;
-    const auto aspect_ratio = 3.0 / 2.0;
+    const int image_width = 400;
+    const auto aspect_ratio = 16.0 / 9.0;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
-    int samples_per_pixel = 500;
-    std::string file_name = "../result/Image.ppm";
+    int samples_per_pixel = 100;
+    std::string file_name = "../result/Moving_Sphere.ppm";
     std::ofstream out_file(file_name);
 
     HittableList world = random_scene();
@@ -103,7 +105,7 @@ int main()
     auto dist_to_focus = 10.0;
     auto aperture = 0.1;
 
-    Camera camera(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
+    Camera camera(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
 
     out_file << "P3\n" << image_width << " " << image_height << " \n255\n";
     for (int j = image_height - 1; j >= 0; --j)

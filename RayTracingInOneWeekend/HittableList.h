@@ -1,4 +1,4 @@
-#ifndef _GQY_HITTABLE_LIST_H_
+ï»¿#ifndef _GQY_HITTABLE_LIST_H_
 #define _GQY_HITTABLE_LIST_H_
 
 #include "Hittable.h"
@@ -9,7 +9,7 @@
 class HittableList : public Hittable
 {
 public:
-    // ¹«ÓĞº¯Êı
+    // å…¬æœ‰å‡½æ•°
     HittableList();
     HittableList(std::shared_ptr<Hittable> objectValue);
     ~HittableList();
@@ -18,9 +18,10 @@ public:
     void add(std::shared_ptr<Hittable> objectValue);
 
     virtual bool hit(const ray& r, double t_min, double t_max, Hit_record& rec) const override;
+    virtual bool bounding_box(double time0, double time1, AABB& output_box) const override;
 
 public:
-    // ¹«ÓĞ±äÁ¿
+    // å…¬æœ‰å˜é‡
     std::vector<std::shared_ptr<Hittable>> objects;
 };
 

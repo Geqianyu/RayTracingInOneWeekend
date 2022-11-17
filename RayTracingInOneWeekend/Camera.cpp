@@ -2,7 +2,7 @@
 #include "RTIWeekend.h"
 #include "Camera.h"
 
-Camera::Camera(point lookfrom, point lookat, vec3 vup, double vfov, double aspect_ratio, double aperture, double focus_dist)
+Camera::Camera(point lookfrom, point lookat, vec3 vup, double vfov, double aspect_ratio, double aperture, double focus_dist, double time0Value, double time1Value)
 {
     auto theta = degree_to_radians(vfov);
     auto h = tan(theta / 2);
@@ -19,6 +19,8 @@ Camera::Camera(point lookfrom, point lookat, vec3 vup, double vfov, double aspec
     lower_left_corner = origin - horizontal / 2 - vertical / 2 - focus_dist * w;
 
     lens_radius = aperture / 2;
+    time0 = time0Value;
+    time1 = time1Value;
 }
 
 Camera::~Camera()
@@ -31,5 +33,5 @@ ray Camera::get_ray(double s, double t) const
     vec3 rd = lens_radius * random_in_unit_disk();
     vec3 offset = u * rd.x + v * rd.y;
 
-    return ray(origin + offset, lower_left_corner + s * horizontal + t * vertical - origin - offset);
+    return ray(origin + offset, lower_left_corner + s * horizontal + t * vertical - origin - offset, random_double(time0, time1));
 }

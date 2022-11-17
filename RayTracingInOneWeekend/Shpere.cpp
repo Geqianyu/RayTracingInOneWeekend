@@ -48,3 +48,9 @@ bool Shpere::hit(const ray& r, double t_min, double t_max, Hit_record& rec) cons
 
     return true;
 }
+
+bool Shpere::bounding_box(double time0, double time1, AABB& output_box) const
+{
+    output_box = AABB(center - vec3(radius, radius, radius), center + vec3(radius, radius, radius));
+    return true;
+}

@@ -1,4 +1,4 @@
-#ifndef _GQY_RAY_H_
+ï»¿#ifndef _GQY_RAY_H_
 #define _GQY_RAY_H_
 
 #include "Vec3.h"
@@ -6,17 +6,18 @@
 class ray
 {
 public:
-    // ¹«ÓĞº¯Êı
+    // å…¬æœ‰å‡½æ•°
     ray();
-    ray(const point& originValue, const vec3& directionValue);
+    ray(const point& originValue, const vec3& directionValue, double timeValue = 0.0);
     ~ray();
 
     point at(double t) const;
 
 public:
-    // ¹«ÓĞ±äÁ¿
+    // å…¬æœ‰å˜é‡
     point origin;
     vec3 direction;
+    double time;
 };
 
 #endif // !_GQY_RAY_H_

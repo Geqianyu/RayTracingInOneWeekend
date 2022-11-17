@@ -1,4 +1,4 @@
-
+﻿
 #include "Ray.h"
 
 ray::ray()
@@ -6,7 +6,7 @@ ray::ray()
 
 }
 
-ray::ray(const point& originValue, const vec3& directionValue) : origin(originValue), direction(directionValue)
+ray::ray(const point& originValue, const vec3& directionValue, double timeValue) : origin(originValue), direction(directionValue), time(timeValue)
 {
 
 }
