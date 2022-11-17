@@ -18,6 +18,9 @@ public:
     virtual bool hit(const ray& r, double t_min, double t_max, Hit_record& rec) const override;
     virtual bool bounding_box(double time0, double time1, AABB& output_box) const override;
 
+private:
+    static void get_sphere_uv(const point& p, double& u, double& v);
+
 public:
     // 公有变量
     point center;

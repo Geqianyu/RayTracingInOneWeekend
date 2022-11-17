@@ -33,12 +33,35 @@ color ray_color(const ray& r, const Hittable& world, int depth)
     return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
+HittableList two_perlin_spheres()
+{
+    HittableList objects;
+    auto pertext = std::make_shared<Noise_Texture>(4);
+
+    objects.add(std::make_shared<Shpere>(point(0, -1000, 0), 1000, std::make_shared<Lambertian>(pertext)));
+    objects.add(std::make_shared<Shpere>(point(0, 2, 0), 2, std::make_shared<Lambertian>(pertext)));
+
+    return objects;
+}
+
+HittableList two_spheres()
+{
+    HittableList objects;
+    auto checker = std::make_shared<Checker_Texture>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
+
+    objects.add(std::make_shared<Shpere>(point(0, -10, 0), 10, std::make_shared<Lambertian>(checker)));
+    objects.add(std::make_shared<Shpere>(point(0, 10, 0), 10, std::make_shared<Lambertian>(checker)));
+
+    return objects;
+}
+
 HittableList random_scene()
 {
     HittableList world;
 
-    auto ground_material = std::make_shared<Lambertian>(color(0.5, 0.5, 0.5));
-    world.add(std::make_shared<Shpere>(point(0, -1000, 0), 1000, ground_material));
+    auto checker = std::make_shared<Checker_Texture>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
+    auto ground_material = std::make_shared<Lambertian>(checker);
+    world.add(std::make_shared<Shpere>(point(0, -1000, 0), 1000, std::make_shared<Lambertian>(checker)));
 
     for (int a = -11; a < 11; a++)
     {
@@ -97,15 +120,40 @@ int main()
     std::string file_name = "../result/Moving_Sphere.ppm";
     std::ofstream out_file(file_name);
 
-    HittableList world = random_scene();
+    HittableList world;
 
-    point lookfrom(13, 2, 3);
-    point lookat(0, 0, 0);
+    point lookfrom;
+    point lookat;
     vec3 vup(0, 1, 0);
     auto dist_to_focus = 10.0;
-    auto aperture = 0.1;
+    auto vfov = 20.0;
+    auto aperture = 0.0;
 
-    Camera camera(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
+    switch (0)
+    {
+    case 1:
+        world = random_scene();
+        lookfrom = point(13, 2, 3);
+        lookat = point(0, 0, 0);
+        vfov = 20.0;
+        aperture = 0.1;
+        break;
+    case 2:
+        world = two_spheres();
+        lookfrom = point(13, 2, 3);
+        lookat = point(0, 0, 0);
+        vfov = 20.0;
+        break;
+    default:
+    case 3:
+        world = two_perlin_spheres();
+        lookfrom = point(13, 2, 3);
+        lookat = point(0, 0, 0);
+        vfov = 20.0;
+        break;
+    }
+
+    Camera camera(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
 
     out_file << "P3\n" << image_width << " " << image_height << " \n255\n";
     for (int j = image_height - 1; j >= 0; --j)

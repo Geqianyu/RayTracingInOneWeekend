@@ -3,6 +3,7 @@
 
 #include "Vec3.h"
 #include "Ray.h"
+#include "Texture.h"
 
 struct Hit_record;
 
@@ -19,12 +20,13 @@ class Lambertian : public Material
 {
 public:
     Lambertian(const color& a);
+    Lambertian(std::shared_ptr<Texture> a);
     ~Lambertian();
 
     virtual bool scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattered) const override;
 
 public:
-    color albedo;
+    std::shared_ptr<Texture> albedo;
 };
 
 class Metal : public Material

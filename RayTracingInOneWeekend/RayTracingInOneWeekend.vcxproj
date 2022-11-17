@@ -141,6 +141,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MovingSphere.cpp" />
+    <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RTIWeekend.cpp" />
     <ClCompile Include="Shpere.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="HittableList.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MovingSphere.h" />
+    <ClInclude Include="Perlin.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RTIWeekend.h" />
     <ClInclude Include="Sphere.h" />
