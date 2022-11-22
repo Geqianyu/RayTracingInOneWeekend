@@ -13,6 +13,11 @@ Material::~Material()
 
 }
 
+color Material::emitted(double u, double v, const point& p) const
+{
+    return color(0, 0, 0);
+}
+
 Lambertian::Lambertian(const color& a) : albedo(std::make_shared<solid_color>(a))
 {
 
@@ -98,4 +103,46 @@ double Dielectric::reflectance(double cosine, double ref_idx)
     auto r0 = (1 - ref_idx) / (1 + ref_idx);
     r0 = r0 * r0;
     return r0 + (1 - r0) * pow((1 - cosine), 5);
+}
+
+Diffuse_Light::Diffuse_Light(std::shared_ptr<Texture> a) : emit(a)
+{
+
+}
+
+Diffuse_Light::Diffuse_Light(color c) : emit(std::make_shared<solid_color>(c))
+{
+
+}
+
+Diffuse_Light::~Diffuse_Light()
+{
+
+}
+
+bool Diffuse_Light::scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattere) const
+{
+    return false;
+}
+
+color Diffuse_Light::emitted(double u, double v, const point& p) const
+{
+    return emit->value(u, v, p);
+}
+
+Isotropic::Isotropic(color c) : albedo(std::make_shared<solid_color>(c))
+{
+
+}
+
+Isotropic::Isotropic(std::shared_ptr<Texture> a) : albedo(a)
+{
+
+}
+
+bool Isotropic::scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattered) const
+{
+    scattered = ray(rec.p, random_in_unit_sphere(), r_in.time);
+    attenuation = albedo->value(rec.u, rec.v, rec.p);
+    return true;
 }

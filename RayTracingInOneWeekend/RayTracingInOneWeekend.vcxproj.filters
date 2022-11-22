@@ -60,6 +60,15 @@
     <ClCompile Include="Perlin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AArect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Constant_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec3.h">
@@ -102,6 +111,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Perlin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AArect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant_Medium.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,7 @@ public:
     ~Material();
 
     virtual bool scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattered) const = 0;
+    virtual color emitted(double u, double v, const point& p) const;
 };
 
 class Lambertian : public Material
@@ -55,6 +56,32 @@ private:
 
 public:
     double ir;
+};
+
+class Diffuse_Light : public Material
+{
+public:
+    Diffuse_Light(std::shared_ptr<Texture> a);
+    Diffuse_Light(color c);
+    ~Diffuse_Light();
+
+    virtual bool scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattere) const override;
+    virtual color emitted(double u, double v, const point& p) const override;
+
+public:
+    std::shared_ptr<Texture> emit;
+};
+
+class Isotropic : public Material
+{
+public:
+    Isotropic(color c);
+    Isotropic(std::shared_ptr<Texture> a);
+
+    virtual bool scatter(const ray& r_in, const Hit_record& rec, color& attenuation, ray& scattered) const override;
+
+public:
+    std::shared_ptr<Texture> albedo;
 };
 
 #endif // !_GQY_MATERIAL_H_

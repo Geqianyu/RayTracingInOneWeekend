@@ -52,4 +52,22 @@ public:
     double scale;
 };
 
+class Image_Texture : public Texture
+{
+public:
+    Image_Texture();
+    Image_Texture(const char* filename);
+    ~Image_Texture();
+
+    virtual color value(double u, double v, const point& p) const override;
+
+public:
+    const static int bytes_per_pixel = 3;
+
+private:
+    unsigned char* data;
+    int width, height;
+    int bytes_per_scanline;
+};
+
 #endif // !_GQY_TEXTURE_H_
